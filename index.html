@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /*reset.css*/
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        fieldset, img {
+            border: 0;
+        }
+
+        address, caption, cite, code, dfn, em, strong, th, var, optgroup {
+            font-style: inherit;
+            font-weight: inherit;
+        }
+
+        del, ins {
+            text-decoration: none;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        caption, th {
+            text-align: left;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-size: 100%
+        }
+
+        q:before, q:after {
+            content: '';
+        }
+
+        abbr, acronym {
+            border: 0;
+            font-variant: normal;
+        }
+
+        sup {
+            vertical-align: baseline;
+        }
+
+        sub {
+            vertical-align: baseline;
+        }
+
+        legend {
+            color: #000;
+        }
+
+        input, button, textarea, select, optgroup, option {
+            font-family: inherit;
+            font-size: inherit;
+            font-style: inherit;
+            font-weight: inherit;
+        }
+
+        input, button, textarea, select {
+            *font-size: 100%;
+        }
+
+        body {
+            font: 12px/1.2 "宋体"
+        }
+
+        textarea, input {
+            outline: none;
+            resize: none;
+        }
+
+        .clearfix:after {
+            content: "\020";
+            display: block;
+            height: 0;
+            clear: both;
+        }
+
+        .clearfix {
+            zoom: 1;
+        }
+        .ul1{width: 1000px;height: 450px;position: absolute;top:500px;left: 100px;border: 1px solid blue;}
+        .ul1 li{width: 100px;height: 100px;background: red;margin:20px; color: #fff;font-size: 22px;text-align: center;float: left;}
+        .ul1 li:nth-child(2n+1){border: 1px solid green;background: yellowgreen}
+        .div1{width: 200px;height: 200px;border: 1px solid #000000;position: relative; top:150px;left: 150px;margin-right: 50px;padding: 50px}
+        .div2,.div3{background: yellow;width: 50px; height: 50px; bottom:0;right:0;position: absolute;margin: 50px}
+        .div3{top:0; left: 0}
+    </style>
+</head>
+<body style="height: 2000px">
+    <ul class="ul1">
+        <li>
+            <h2 class="tit" style="height: 30px;background: #ccc">title</h2>
+            相对定位1
+        </li>
+        <li>相对定位2</li>
+        <li>相对定位3</li>
+        <li>相对定位4</li>
+    </ul>
+    <div class="div1">
+        <span class="div2">绝对定位1</span>
+    </div>
+
+    <span class="div3">绝对定位啊</span>
+
+    <div class="fixed" style="height: 80px;width: 50px;background: blueviolet;position: fixed;right: 0;top:50%;color: #fff">fixed定位</div>
+
+    <div style="width: 200px;height: 100px;position: relative;margin: 0 auto;">
+        <div class="dis-box" style="width: 200px;height: 100px;overflow: hidden;border: 1px solid red;position: relative">
+            <div class="dis-con" style="position: absolute;width: 100%;">
+                文章内容文章内容文章内容文章sdf内容文章内容文章内容文章内容文章内gg容文章内容文章内容文章内hh容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容
+                文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容sdf文章内容hh文章内容文章内容h文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容
+                文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容gg文章内容文章内容文章内容文章h内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容
+            </div>
+        </div>
+        <div class="bar" style="width: 16px;height: 100px;background: #ccc;position: absolute;right: -20px;top:0;">
+            <span style="display:block;width: 10px;height: 20px;background: darkred;margin-left: 3px"></span>
+        </div>
+    </div>
+    <div class="div4" style="position:absolute;width: 200px;height: 200px;border: 1px solid #ccc;">div4</div>
+    <script src="1.7.2.min.js"></script>
+<script src="drag.js"></script>
+<script>
+    $(function(){
+        var div=$(".div4");
+        div.on("mousedown",function(e){
+            var offset=div.offset();
+            div.css({
+                marginLeft:offset.left-e.clientX,
+                marginTop:offset.top-e.clientY,
+                left:e.clientX,top:e.clientY
+            });
+            $(document).on("mousemove.dragging",function(e){
+                console.log(e.clientX);
+                div.css({left:e.clientX,top:e.clientY});
+            }).one("mouseup",function(e){
+                $(document).off("mousemove.dragging");
+            });
+        });
+    });
+    var drag1 = Drag({
+        ele: $('.ul1 li'),
+        handle: '.tit',
+        xlock: true,
+        range: $('.ul1')
+    }).on('start',function(e,ele){//开始拖拽 鼠标按下
+        console.log(e.pageX);
+    }).on('drag',function(e,ele){//拖拽 鼠标移动
+        console.log(e.pageX);
+    })
+
+    drag1.on('drop',function(e,ele){//拖拽结束 鼠标up
+        console.log(e.pageX);
+    })
+    //
+    Drag({
+        ele: $('.div2'),
+        range: $(window)
+    }).on('drag',function(e,ele){
+        console.log(e.pageX + '---' + e.pageY);
+    });
+    //
+    Drag({
+        ele: $('.div3'),
+        range: $('.div1')
+    });
+    //
+    Drag({
+        ele: $('.fixed'),
+        ylock: true
+    });
+    //自定义滚动条
+    var $box = $('.dis-box');
+    var $par = $('.bar');
+    var $drag = $par.find('span');
+    var $con = $('.dis-con');
+    var diff = $par.height() - $drag.height();
+    var boxh = $box.height();
+    var conh = $con.height();
+    var diff2 = conh - boxh;
+    Drag({
+        ele: $drag,
+        range: $par,
+        xlock: true
+    }).on('drag',function(e,ele){
+        var top = parseInt(ele.style.top);
+        var scale = top/diff;
+        var top2 = parseInt(-scale*diff2)
+        $con.css('top',top2);
+    });
+
+</script>
+</body>
+</html>
