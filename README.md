@@ -3,7 +3,7 @@
 >如果元素有定位，拖拽会以元素css设置的定位进行拖拽
 
 ### demo页面
-* [http://my-de-drag.coding.io/](http://my-de-drag.coding.io/)
+* [http://drag.coding.io/](http://drag.coding.io/)
 
 ### 最简单的例子
 
